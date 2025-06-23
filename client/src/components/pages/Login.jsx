@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthDesign from "../UI/AuthDesign";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const inputFields = [
     {
@@ -24,8 +26,11 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login form:", { email, password });
+    if (email && password) {
+      navigate('/dashboard');
+    }
   };
+
   return (
     <AuthDesign
       title="Login"

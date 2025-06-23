@@ -1,11 +1,13 @@
 import { useState } from "react";
 import AuthDesign from "../UI/AuthDesign";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
   const inputFields = [
     {
@@ -38,13 +40,10 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Register form:", {
-      firstName,
-      lastName,
-      email,
-      password,
-    });
-  };
+ if (firstName && lastName&& email&& password) {
+  navigate('/dashboard')
+ }
+    };
 
   return (
     <AuthDesign

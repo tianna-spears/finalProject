@@ -1,17 +1,18 @@
 import React from "react";
 import { ImArrowUpRight2 } from "react-icons/im";
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box'
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-<Box sx={{ width: '100%' }}>      
-<AppBar position="static" sx={{ backgroundColor: 'secondary.main' }}>
+    <Box sx={{ width: "100%" }}>
+      <AppBar position="static" sx={{ backgroundColor: "secondary.main" }}>
         <Toolbar>
           <IconButton
             size="medium"
@@ -25,11 +26,12 @@ const NavBar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Apprenti
             <ImArrowUpRight2 />
-          </Typography>
-          <Button color="inherit">Login</Button>
+          </Typography>          
+          <Button color="inherit" component={Link} to="/"> Home </Button>
+          <Button color="inherit" component={Link} to="/login">Login </Button>
         </Toolbar>
       </AppBar>
-      </Box>
+    </Box>
   );
 };
 

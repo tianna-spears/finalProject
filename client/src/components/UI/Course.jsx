@@ -3,7 +3,11 @@ import React from "react";
 const Course = () => {
     return (
         <div>
-            Course Component
+            I am currently studying *course*
+            dropdown scroll - Intro to Programming, React, Node /Express, Python
+            save to user function 
+
+            CRUD 
         </div>
     )
 }
