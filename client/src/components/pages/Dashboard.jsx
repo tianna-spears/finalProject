@@ -45,13 +45,13 @@ export default function Dashboard() {
 
         <Grid item xs={12} md={4}>
           <Item>
-            <Calendar />
+            <MentorSession />
           </Item>
         </Grid>
 
         <Grid item xs={12} md={4}>
           <Item>
-            <MentorSession />
+            <Calendar />
           </Item>
         </Grid>
       </Grid>

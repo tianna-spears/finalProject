@@ -1,9 +1,10 @@
 import React from "react";
 
 const UpcomingHW = () => {
-  return <div>UpcomingHW Component 
+  return <div>
+    <h1> UpcomingHW Component 
     RMOR due ? 
-    CRUD</div>;
+    CRUD </h1></div>
 };
 
 export default UpcomingHW;
