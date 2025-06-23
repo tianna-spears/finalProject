@@ -1,5 +1,8 @@
 const getDashboard = async (req, res) => {
-    res.send('Dashboard')
+    res.send('Get Dashboard')
 }
 
+// needs to be protected (authentication)
+
 module.exports = getDashboard
+

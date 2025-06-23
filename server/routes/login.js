@@ -1,14 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const { getUsers,
-    createUser,
-    updateUser,
-    deleteUser
-} = require('../controllers/login')
+const getUsers = require('../controllers/login')
 
-router.get('/', getUsers)
-router.post('/', createUser)
-router.patch('/', updateUser)
-// router.delete('/', deleteUser)
+// Login in is READ in CRUD
+// get email and get password from Login Form (POST)
+// just need to find the user in the database
+//and check if information is correct
+
+router.post('/', getUsers)
 
 module.exports = router;

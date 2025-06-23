@@ -1,18 +1,7 @@
-// create user
-// get user by ID
-// update user by ID
-// delete user by ID
-
-const getUser = async (req, res) => {
-    res.send('Get User')
-}
-
 const registerUser = async(req, res) => {
     res.send('Register user')
 }
 
-
-// create user 
 // const registerUser  = async (req, res) => {
 //     const { fname, lname, email, password } = req.body;
 
@@ -22,5 +11,4 @@ const registerUser = async(req, res) => {
 //     res.status(200).send('User successfully created!')
 // }
 
-module.exports = getUser
-    // registerUser
+module.exports = registerUser

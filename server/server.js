@@ -5,6 +5,7 @@ const app = express();
 const loginRoute = require("./routes/login");
 const registerRoute = require("./routes/register");
 const dashboardRoute = require("./routes/dashboard");
+const profileRoute = require("./routes/profile")
 const connectDB = require("./database/connectDB");
 
 // middleware
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/dashboard", dashboardRoute);
+app.use("/profile", profileRoute)
 
 const start = async () => {
     try {

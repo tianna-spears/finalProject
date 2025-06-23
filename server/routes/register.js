@@ -1,8 +1,17 @@
 const express = require('express');
-const getUser = require('../controllers/register');
 const router = express.Router()
+const registerUser = require('../controllers/register');
 
-router.get('/', getUser)
-// router.get('/', registerUser)
+router.post('/', registerUser)
+
+// register new user and save to database
+// form contains the following:
+    // first name
+    // last name
+    // email
+    // password
+// Register is Create in CRUD
+
+// is user already in database? (validation logic)
 
 module.exports = router;
