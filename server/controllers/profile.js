@@ -1,12 +1,9 @@
-// get/ display profile
-// update profile
-// delete profile
+const mongoose = require('mongoose')
+const User= require('../models/User')
 
-
-// needs to be protected (authentication)
 
 const getProfileByID = async (req, res) => {
-  res.send("Get Profile");
+  res.json("User Profile Here");
 };
 
 const updateProfileByID = async (req, res) => {

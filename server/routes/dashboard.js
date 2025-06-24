@@ -1,11 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const  getDashboard = require('../controllers/dashboard')
+const { getDashboard, displayCourse } = require('../controllers/dashboard')
 
-// get dashboard page based on user?
-// display dashboard only if user is logged in (authentication)
-
-
-router.get('/', getDashboard)
-
+router.get('/', getDashboard, displayCourse)
 module.exports = router;
