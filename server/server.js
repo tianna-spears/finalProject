@@ -6,12 +6,12 @@ const loginRoute = require("./routes/login");
 const registerRoute = require("./routes/register");
 const dashboardRoute = require("./routes/dashboard");
 const profileRoute = require("./routes/profile")
+const dataInputRoute = require("./routes/dataInput")
 const connectDB = require("./database/connectDB");
 
 // middleware
 const authMiddleware = require('./middleware/auth')
 app.use(express.json());
-
 
 const PORT = process.env.PORT || 3001;
 
@@ -24,6 +24,7 @@ app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/dashboard", authMiddleware, dashboardRoute);
 app.use("/profile", authMiddleware, profileRoute)
+app.use("/dataInput", dataInputRoute)
 
 const start = async () => {
     try {

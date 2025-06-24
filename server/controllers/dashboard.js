@@ -1,4 +1,6 @@
-const getDashboard = async (req, res) => {
+const User = require('../models/User')
+
+const getGreeting = async (req, res) => {
   try {
     const displayUserName = req.user.firstName
     res.json(`Hi, ${displayUserName}! Welcome to your dashboard.`);
@@ -7,14 +9,35 @@ const getDashboard = async (req, res) => {
   }
 };
 
-const displayCourse = async (req, res) => {
+const getDashboard = async (req, res) => {
   try {
-    const displayCourseName = req.user.courseName
-    res.json(`You are currently enrolled in the course: ${displayCourseName}!`);
+    const getUserID = req.user.userId
+
+    const getUserDashboard = await User.findById(getUserID).populate({
+      path: 'course',
+      populate: [
+        {path: 'assignments'},
+        {path: 'mentorsession'},
+        {path: 'calendar'}
+      ]
+    })
+      if (!getUserDashboard) {
+        res.status(404).json({error: 'There was an error loading the dashboard. Please try again.'})
+      }
+
+      res.status(200).json({ 
+      user: {
+        name: getUserDashboard.firstName,
+      },
+      course: getUserDashboard.course,
+    });
+
   } catch (err) {
-    res.status(500).json({error: 'There was an issue with the server. Please try again.'})
+    console.error(err);
+    res.status(500).json({ error: 'There was an issue with the server. Please try again.' });
   }
 };
 
 
-module.exports = {getDashboard, displayCourse}
+
+module.exports = {getGreeting, getDashboard}

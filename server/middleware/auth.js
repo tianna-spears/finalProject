@@ -10,7 +10,11 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    req.user = { userId: payload.userId, email: payload.email, firstName: payload.firstName, courseName: payload.courseName };
+    req.user = { 
+      userId: payload.userId, 
+      email: payload.email, 
+      firstName: payload.firstName, 
+      courseName: payload.courseName };
     next();
   } catch (error) {
     return res.status(401).json({ error: "Access denied. Invalid or expired token." });

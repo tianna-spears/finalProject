@@ -19,12 +19,11 @@ const User = new mongoose.Schema(
       type: String,
       minLength: 7,
       required: true,
-      // make sure to hash it! install bcrypt
     },
     course: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Course",
-      required: false,
+      required: true,
   }},
   { timestamps: true }
 );
