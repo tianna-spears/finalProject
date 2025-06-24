@@ -12,8 +12,8 @@ const getAllCourses = async (req, res) => {
 };
 
 const createCourse = async (req, res) => {
-  const { courseName, startDate, endDate } = req.body;
-  if (!courseName || !startDate || !endDate) {
+  const { courseName, courseDates } = req.body;
+  if (!courseName || !courseDates) {
     return res
       .status(400)
       .json({ error: "Please insert all required fields." });
@@ -24,7 +24,7 @@ const createCourse = async (req, res) => {
   }
 
   try {
-    const newCourse = new Course({ courseName, startDate, endDate });
+    const newCourse = new Course({ courseName, courseDates });
     await newCourse.save();
     res.status(200).send(`Course ${courseName} was successfully created!`);
   } catch (err) {

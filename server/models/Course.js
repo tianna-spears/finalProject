@@ -13,12 +13,8 @@ const Course = new mongoose.Schema({
     unique: true,
     required: true,
   },
-  startDate: {
-    type: Date,
-    required: true,
-  },
-  endDate: {
-    type: Date,
+  courseDates: {
+    type: String,
     required: true,
   },
 });
