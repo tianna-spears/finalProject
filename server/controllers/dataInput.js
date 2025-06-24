@@ -1,15 +1,7 @@
 const Course = require("../models/Course");
 const Assignment = require("../models/Assignment");
 const MentorSession = require("../models/MentorSession");
-
-const getAllCourses = async (req, res) => {
-  try {
-    const allCourses = await Course.find();
-    res.status(200).json(allCourses);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+const User = require("../models/User")
 
 const createCourse = async (req, res) => {
   const { courseName, courseDates } = req.body;
@@ -20,7 +12,9 @@ const createCourse = async (req, res) => {
   }
   const existingCourse = await Course.findOne({ courseName });
   if (existingCourse) {
-    return res.status(409).json({ error: `Course (${courseName}) already exists.` });
+    return res
+      .status(409)
+      .json({ error: `Course (${courseName}) already exists.` });
   }
 
   try {
@@ -72,15 +66,6 @@ const createAssignment = async (req, res) => {
   }
 };
 
-const getAllAssignments = async (req, res) => {
-  try {
-    const getAssignments = await Assignment.find().populate('courseID').sort('dueDate');
-    res.status(200).json(getAssignments);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
 const createMentorSession = async (req, res) => {
   try {
     const { mentor, sessionDate } = req.body;
@@ -103,10 +88,50 @@ const createMentorSession = async (req, res) => {
   }
 };
 
+const getAllCourses = async (req, res) => {
+  try {
+    const allCourses = await Course.find();
+    res.status(200).json(allCourses);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const getAllAssignments = async (req, res) => {
+  try {
+    const getAssignments = await Assignment.find()
+      .populate("courseID")
+      .sort("dueDate");
+    res.status(200).json(getAssignments);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const getUserByCourseID = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ error: "Course ID field is required." });
+    }
+    const findUser = await User.find({ courseID: id })
+      .populate("courseID", "courseName")
+      .select("firstName lastName courseID");
+
+    if (findUser.length === 0) {
+      return res.status(404).json({ message: `There are currently no students enrolled in course ID: ${ id }`})
+    }
+    res.status(200).json(findUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
-  getAllAssignments,
-  getAllCourses,
   createCourse,
   createAssignment,
   createMentorSession,
+  getAllCourses,
+  getAllAssignments,
+  getUserByCourseID,
 };
