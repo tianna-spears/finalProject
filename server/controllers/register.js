@@ -25,7 +25,6 @@ const existingUser = await User.findOne( { email })
       email,
       password: hashedPassword,
     });
-    console.log({newUser})
     await newUser.save();
     res
       .status(201)

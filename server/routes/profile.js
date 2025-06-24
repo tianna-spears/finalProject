@@ -7,7 +7,6 @@ const {
 } = require("../controllers/profile");
 
 // needs to be protected (authentication)
-
  
 router.get("/:id", getProfileByID);
 router.patch("/:id", updateProfileByID);
