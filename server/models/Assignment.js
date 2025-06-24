@@ -6,7 +6,7 @@ const Assignment = new mongoose.Schema({
     required: true,
   },
   dueDate: {
-    type: String,
+    type: Date,
     required: true,
   },
   courseID: {

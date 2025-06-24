@@ -4,7 +4,7 @@ const MentorSession = require("../models/MentorSession");
 
 const getAllCourses = async (req, res) => {
   try {
-    const allCourses = await Course.find({}, "course");
+    const allCourses = await Course.find();
     res.status(200).json(allCourses);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -74,7 +74,7 @@ const createAssignment = async (req, res) => {
 
 const getAllAssignments = async (req, res) => {
   try {
-    const getAssignments = await Assignment.find().populate('course').sort('dueDate');
+    const getAssignments = await Assignment.find().populate('courseID').sort('dueDate');
     res.status(200).json(getAssignments);
   } catch (err) {
     res.status(500).json({ error: err.message });
