@@ -1,13 +1,16 @@
 import { useState } from "react";
 import AuthDesign from "../UI/AuthDesign";
 import { useNavigate } from "react-router-dom";
+import Course from "../UI/Course"
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
+  const [selectCourse, setSelectCourse] = useState("");
+
+  const navigate = useNavigate();
 
   const inputFields = [
     {
@@ -38,20 +41,34 @@ const Register = () => {
     },
   ];
 
+  const handleSelect = (course) => {
+  setSelectCourse(course)
+    }
+
   const handleSubmit = (e) => {
     e.preventDefault();
- if (firstName && lastName&& email&& password) {
-  navigate('/dashboard')
- }
-    };
+    if (firstName && lastName && email && password && selectCourse) {
+      navigate("/dashboard");
+    } else {
+      alert('Please fill out all required fields.')
+    }
+  };
 
   return (
+    <>
+        <Course 
+    selectCourse= {selectCourse}
+    handleSelect= {handleSelect}
+    />
     <AuthDesign
       title="Register"
       inputFields={inputFields}
       buttonText="Register"
       onSubmit={handleSubmit}
     />
+
+
+    </>
   );
 };
 
