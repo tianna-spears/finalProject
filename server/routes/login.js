@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const getUsers = require('../controllers/login')
+const userLogin = require('../controllers/login')
 
 // Login in is READ in CRUD
 // get email and get password from Login Form (POST)
-// just need to find the user in the database
-//and check if information is correct
+// does user already exist in database?
+// does the user password match the hashed password in database?
 
-router.post('/', getUsers)
+router.post('/', userLogin)
 
 module.exports = router;
