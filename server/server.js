@@ -9,7 +9,9 @@ const profileRoute = require("./routes/profile")
 const connectDB = require("./database/connectDB");
 
 // middleware
+const authMiddleware = require('./middleware/auth')
 app.use(express.json());
+
 
 const PORT = process.env.PORT || 3001;
 
@@ -20,8 +22,8 @@ app.get("/", (req, res) => {
 
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
-app.use("/dashboard", dashboardRoute);
-app.use("/profile", profileRoute)
+app.use("/dashboard", authMiddleware, dashboardRoute);
+app.use("/profile", authMiddleware, profileRoute)
 
 const start = async () => {
     try {
