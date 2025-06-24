@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Course = require("../models/Course");
 const bcrypt = require("bcrypt");
 
 const registerUser = async (req, res) => {
@@ -18,13 +19,17 @@ const existingUser = await User.findOne( { email })
   }
 
   try {
+       const courseNum = await Course.findOne({ courseName });
+    if (!courseNum) {
+      return res.status(404).json({ error: `Course (${courseName}) not found.` });
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       firstName,
       lastName,
       email,
       password: hashedPassword,
-      courseName,
+      courseID: courseNum._id,
     });
     await newUser.save();
     res

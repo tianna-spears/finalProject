@@ -5,8 +5,8 @@ const MentorSession = new mongoose.Schema({
     type: String,
     required: true,
   },
-  sessionDateAndTime: {
-    type: Date,
+  sessionDate: {
+    type: String,
     required: true,
   }
 });

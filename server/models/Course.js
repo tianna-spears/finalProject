@@ -6,9 +6,9 @@ const Course = new mongoose.Schema({
     enum: [
       "Intro to Programming",
       "React.js",
-      "Node/Express",
+      "Node Express",
       "Ruby on Rails",
-      "Python",
+      "Python"
     ],
     unique: true,
     required: true,

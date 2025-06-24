@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Assignment = require('../models/Assignment');
 
 const getGreeting = async (req, res) => {
   try {
@@ -13,23 +14,20 @@ const getDashboard = async (req, res) => {
   try {
     const getUserID = req.user.userId
 
-    const getUserDashboard = await User.findById(getUserID).populate({
-      path: 'course',
-      populate: [
-        {path: 'assignments'},
-        {path: 'mentorsession'},
-        {path: 'calendar'}
-      ]
-    })
+    const getUserDashboard = await User.findById(getUserID).populate('courseID', 'courseName')
       if (!getUserDashboard) {
         res.status(404).json({error: 'There was an error loading the dashboard. Please try again.'})
       }
 
+      const assignments = await Assignment.find(
+        { courseID: getUserDashboard.courseID._id }).sort({dueDate: 1})
+
       res.status(200).json({ 
       user: {
         name: getUserDashboard.firstName,
+        courseName: getUserDashboard.courseID.courseName,
       },
-      course: getUserDashboard.course,
+      assignments
     });
 
   } catch (err) {

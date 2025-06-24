@@ -4,7 +4,7 @@ const MentorSession = require("../models/MentorSession");
 
 const getAllCourses = async (req, res) => {
   try {
-    const allCourses = await Course.find({}, "courseName");
+    const allCourses = await Course.find({}, "course");
     res.status(200).json(allCourses);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -83,16 +83,16 @@ const getAllAssignments = async (req, res) => {
 
 const createMentorSession = async (req, res) => {
   try {
-    const { mentor, sessionDateAndTime } = req.body;
-    if (!mentor || !sessionDateAndTime) {
+    const { mentor, sessionDate } = req.body;
+    if (!mentor || !sessionDate) {
       return res
         .status(400)
         .json({ error: "Please insert all required fields." });
     }
-    const newMentorSession = new MentorSession({ mentor, sessionDateAndTime });
+    const newMentorSession = new MentorSession({ mentor, sessionDate });
     await newMentorSession.save();
     res.status(200)
-      .send(`Mentor session with ${mentor} on ${sessionDateAndTime} was successfully created!
+      .send(`Mentor session with ${mentor} on ${sessionDate} was successfully created!
         Please remember that this mentor session needs to be completed prior to turning in your assignment.`);
   } catch (err) {
     res

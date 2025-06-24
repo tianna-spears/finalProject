@@ -20,7 +20,7 @@ const User = new mongoose.Schema(
       minLength: 7,
       required: true,
     },
-    course: {
+    courseID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Course",
       required: true,
