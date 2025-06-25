@@ -1,13 +1,18 @@
 import { useState } from "react";
 import AuthDesign from "../UI/AuthDesign";
 import { useNavigate } from "react-router-dom";
+import API from "../../../utils/api";
+import Course from "../UI/Course";
+import { Box } from "@mui/material";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
+  const [selectCourse, setSelectCourse] = useState("");
+
+  const navigate = useNavigate();
 
   const inputFields = [
     {
@@ -38,20 +43,52 @@ const Register = () => {
     },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
- if (firstName && lastName&& email&& password) {
-  navigate('/dashboard')
- }
-    };
+
+    // connect to my API here!
+    if (firstName && lastName && email && password && selectCourse) {
+      try {
+        const res = await API.post("/register", {
+          firstName,
+          lastName,
+          email,
+          password,
+          courseName: selectCourse,
+        });
+        console.log("Registration successful:", res.data);
+        navigate("/dashboard");
+      } catch (err) {
+        console.error(
+          "Registration failed:",
+          err.response?.data || err.message
+        );
+      }
+    }
+  };
 
   return (
-    <AuthDesign
-      title="Register"
-      inputFields={inputFields}
-      buttonText="Register"
-      onSubmit={handleSubmit}
-    />
+    <>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      gap={1} 
+      sx={{ width: '100%', maxWidth: 400, margin: '0 auto', mt: 4 }} 
+    >
+      <Course 
+      selectCourse={selectCourse} 
+      setSelectCourse={setSelectCourse} 
+      />
+
+      <AuthDesign
+        title="Register"
+        inputFields={inputFields}
+        buttonText="Register"
+        onSubmit={handleSubmit}
+      />
+      </Box>
+    </>
   );
 };
 

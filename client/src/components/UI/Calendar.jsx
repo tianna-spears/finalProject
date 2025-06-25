@@ -1,25 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
-const Calendar = () => {
-    // const Date= new Date()
-    // display date here 
-    // calculation of time between today and upcomingHW assignment
-    // display next mentor session here
+const MyCalendar = () => {
+  const [date, setDate] = useState(new Date(2025, 5, 25));
 
   return (
-    <div
-      style={{
-        backgroundImage: `url('/june2025.webp')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "400px",
-        padding: "100px",
-        color: "white",
-      }}
-    >
-      {/* Google Calendar and Ical API goes here */}
+    <div>
+      <Calendar
+        onChange={setDate}
+        value={date}
+        activeStartDate={new Date(2025, 5, 24)}
+        minDate={new Date(2025, 5, 24)}
+        maxDate={new Date(2025, 11, 31)}
+      />
     </div>
   );
 };
 
-export default Calendar;
+export default MyCalendar;

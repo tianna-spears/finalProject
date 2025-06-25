@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthDesign from "../UI/AuthDesign";
+import API from "../../../utils/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,10 +25,16 @@ const Login = () => {
     },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email && password) {
-      navigate('/dashboard');
+    try {
+      const res = await API.post("/login", { email, password });
+      const { token } = res.data;
+
+      localStorage.setItem("token", token);
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Login failed:", err.response?.data || err.message);
     }
   };
 
