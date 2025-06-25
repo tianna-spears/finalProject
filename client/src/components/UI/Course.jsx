@@ -1,8 +1,12 @@
 import React from "react";
-import { Button, Menu, MenuItem, Typography, Stack } from "@mui/material";
-import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
+import { Button, Menu, MenuItem, Typography } from '@mui/material'
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
-const Course = ({ selectCourse, handleSelect }) => {
+const Course = ({ selectCourse, setSelectCourse }) => {
+    const handleSelect = (course, popupState) => {
+        setSelectCourse(course)
+        popupState.close()
+    }
   return (
     <>
       <PopupState variant="popover" popupId="demo-popup-menu">
@@ -27,10 +31,12 @@ const Course = ({ selectCourse, handleSelect }) => {
       )}
 </Stack>
             <Menu {...bindMenu(popupState)}>
+
               {[
-                "Introduction to Programming",
+                "Intro to Programming",
                 "React.js",
-                "Node/Express",
+                "Node Express",
+                "Ruby on Rails",
                 "Python",
               ].map((course) => (
                 <MenuItem
