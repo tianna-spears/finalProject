@@ -3,9 +3,12 @@ import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Checkbox from "@mui/material/Checkbox";
 
 const UpcomingAssignments = ({ assignments = [], userCourseId }) => {
   const [filteredAssignments, setFilteredAssignments] = useState([]);
+  const [checked, setChecked] = useState([]);
 
 useEffect(() => {
   if (!userCourseId) {
@@ -19,7 +22,14 @@ const filtered = assignments.filter(
 );
 
   setFilteredAssignments(filtered);
+  setChecked([]);
 }, [assignments, userCourseId]);
+
+const handleToggle = (id) => () => {
+    setChecked((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
 
   if (!userCourseId) {
     return <Typography color="error">User course ID is missing.</Typography>;
@@ -36,7 +46,21 @@ const filtered = assignments.filter(
       </Typography>
       <List>
         {filteredAssignments.map(({ _id, title, dueDate, lesson }) => (
-          <ListItem key={_id}>
+          <ListItem 
+          key={_id}
+            disablePadding
+            secondaryAction={null}
+            onClick={handleToggle(_id)}
+            sx={{ cursor: "pointer" }}
+          >
+            <ListItemIcon>
+              <Checkbox
+                edge="start"
+                checked={checked.includes(_id)}
+                tabIndex={-1}
+                disableRipple
+              />
+            </ListItemIcon>
             <ListItemText
               primary={title}
               secondary={`Due: ${new Date(dueDate).toLocaleDateString()} - Lesson: ${lesson}`}
