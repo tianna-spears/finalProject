@@ -1,50 +1,50 @@
-import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthDesign from "../UI/AuthDesign";
+import API from "../../../utils/api";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const inputFields = [
+    {
+      label: "Email",
+      type: "email",
+      name: "email",
+      value: email,
+      onChange: (e) => setEmail(e.target.value),
+    },
+    {
+      label: "Password",
+      type: "password",
+      name: "password",
+      value: password,
+      onChange: (e) => setPassword(e.target.value),
+    },
+  ];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await API.post("/login", { email, password });
+      const { token } = res.data;
+
+      localStorage.setItem("token", token);
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Login failed:", err.response?.data || err.message);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 m-8">
-      <form className="border-4 border-pink-600 rounded-xl w-full max-w-md p-8 m-8">
-        <h3 className="text-2xl font-bold text-center text-gray-800">
-          {" "}
-          Login:{" "}
-        </h3>
-
-        <div>
-          <label className="block mb-1 text-gray-700"> First Name: </label>
-          <input
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="text"
-            name="firstname"
-            placeholder="Enter first name here"
-          />
-        </div>
-
-        <div>
-          <label className="block mb-1 text-gray-700"> Last Name: </label>
-          <input
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="text"
-            name="lastname"
-            placeholder="Enter last name here"
-          />
-        </div>
-
-        <div>
-          <label className="block mb-1 text-gray-700"> Email: </label>
-          <input
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            type="email"
-            name="email"
-            placeholder="Enter email here"
-          />
-        </div>
-
-        <button className="block mb-1 bg-red-200" type="submit">
-          {" "}
-          Login{" "}
-        </button>
-      </form>
-    </div>
+    <AuthDesign
+      title="Login"
+      inputFields={inputFields}
+      buttonText="Login"
+      onSubmit={handleSubmit}
+    />
   );
 };
 
