@@ -1,7 +1,8 @@
 const Course = require("../models/Course");
 const Assignment = require("../models/Assignment");
-const MentorSession = require("../models/MentorSession");
 const User = require("../models/User")
+const MentorSession = require('../models/MentorSession');
+
 
 const createCourse = async (req, res) => {
   const { courseName, courseDates } = req.body;
