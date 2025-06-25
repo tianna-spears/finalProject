@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   createCourse,
   createAssignment,
-  createMentorSession,
+  createMentorEvent,
   getMentors,
   getAllCourses,
   getAllAssignments,
@@ -12,7 +12,7 @@ const {
 
 router.post("/course", createCourse);
 router.post("/assignment", createAssignment);
-router.post("/mentor", createMentorSession);
+router.post("/mentor", createMentorEvent);
 router.get("/mentor", getMentors);
 router.get("/course", getAllCourses);
 router.get("/assignment", getAllAssignments);

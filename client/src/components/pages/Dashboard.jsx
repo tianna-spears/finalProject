@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import UpcomingAssignments from "../UI/UpcomingAssignments";
 import MentorSession from "../UI/MentorSession";
-import Calendar from "../UI/Calendar";
+import StudyCalendar from "../UI/StudyCalendar";
 import DisplayDate from "../UI/DisplayDate";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -42,6 +42,7 @@ const Dashboard = () => {
         setAssignments(res.data.assignments);
         setLoading(false);
       } catch (err) {
+        console.error('Rename failed:', err);
         setLoading(false);
       }
     };
@@ -63,34 +64,31 @@ const Dashboard = () => {
         Enrolled in: <strong>{user.courseName}</strong>
       </Typography>
 
-      <Grid container spacing={4} justifyContent="center">
-        <Grid item xs={12} md={4}>
+      <Grid container columns={12} columnSpacing={4} rowSpacing={4} justifyContent="center">
+        <Grid sx={{ gridColumn: "span 4" }}>
           <Item>
             <DisplayDate />
           </Item>
         </Grid>
 
-               <Grid item xs={12} md={4}>
+        <Grid sx={{ gridColumn: "span 4" }}>
           <Item>
-            <Calendar />
+            <StudyCalendar />
           </Item>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid sx={{ gridColumn: "span 6" }}>
           <Item>
-            <UpcomingAssignments assignments={assignments} userCourseId={user.courseId || user.courseID || null} />
+            <UpcomingAssignments
+              assignments={assignments}
+              userCourseId={user.courseId || user.courseID || null}
+            />
           </Item>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid sx={{ gridColumn: "span 6" }}>
           <Item>
             <MentorSession />
-          </Item>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Item>
-            <Calendar />
           </Item>
         </Grid>
       </Grid>

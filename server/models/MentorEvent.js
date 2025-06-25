@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MentorSession = new mongoose.Schema({
+const MentorEvent = new mongoose.Schema({
   mentor: {
     type: String,
     required: true,
@@ -11,4 +11,4 @@ const MentorSession = new mongoose.Schema({
   }
 });
   
-module.exports = mongoose.model("MentorSession", MentorSession);
+module.exports = mongoose.model("MentorEvent", MentorEvent);

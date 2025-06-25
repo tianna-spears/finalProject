@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import API from "../../../utils/api";  // Your axios instance with baseURL
+import API from "../../../utils/api"; 
 import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
 const MentorSession = () => {
   const [sessions, setSessions] = useState([]);
@@ -23,7 +26,7 @@ const MentorSession = () => {
         }
         setLoading(false);
       } catch (err) {
-        setError(err,"Failed to load mentor sessions");
+        setError("Failed to load mentor sessions: " + err.message);
         setLoading(false);
       }
     };
@@ -37,14 +40,19 @@ const MentorSession = () => {
 
   return (
     <div>
-      <Typography variant="h6" gutterBottom>Mentor Sessions</Typography>
-      <ul>
+      <Typography variant="h6" gutterBottom>
+        Mentor Sessions
+      </Typography>
+      <List>
         {sessions.map((session) => (
-          <li key={session._id}>
-            Mentor: {session.mentor}, Date: {session.sessionDate}
-          </li>
+          <ListItem key={session._id}>
+            <ListItemText
+              primary={`Mentor: ${session.mentor}`}
+              secondary={`Availability: ${session.sessionDate}`}
+            />
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };
