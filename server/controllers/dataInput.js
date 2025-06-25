@@ -1,7 +1,7 @@
 const Course = require("../models/Course");
 const Assignment = require("../models/Assignment");
 const User = require("../models/User")
-const MentorSession = require("./models/mentorSession");
+const MentorEvent = require("../models/MentorEvent");
 
 
 const createCourse = async (req, res) => {
@@ -67,7 +67,7 @@ const createAssignment = async (req, res) => {
   }
 };
 
-const createMentorSession = async (req, res) => {
+const createMentorEvent = async (req, res) => {
   try {
     const { mentor, sessionDate } = req.body;
     if (!mentor || !sessionDate) {
@@ -75,7 +75,7 @@ const createMentorSession = async (req, res) => {
         .status(400)
         .json({ error: "Please insert all required fields." });
     }
-    const newMentorSession = new MentorSession({ mentor, sessionDate });
+    const newMentorSession = new MentorEvent({ mentor, sessionDate });
     await newMentorSession.save();
     res.status(200)
       .send(`Mentor session with ${mentor} on ${sessionDate} was successfully created!
@@ -91,7 +91,7 @@ const createMentorSession = async (req, res) => {
 
 const getMentors = async (req, res) => {
   try {
-    const sessions = await MentorSession.find();
+    const sessions = await MentorEvent.find();
     res.status(200).json(sessions);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -140,7 +140,7 @@ const getUserByCourseID = async (req, res) => {
 module.exports = {
   createCourse,
   createAssignment,
-  createMentorSession,
+  createMentorEvent,
   getMentors,
   getAllCourses,
   getAllAssignments,
