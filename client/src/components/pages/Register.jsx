@@ -56,6 +56,9 @@ const Register = () => {
           password,
           courseName: selectCourse,
         });
+        const token = res.data.token;
+        localStorage.setItem("token", token);
+
         console.log("Registration successful:", res.data);
         navigate("/dashboard");
       } catch (err) {
@@ -69,24 +72,21 @@ const Register = () => {
 
   return (
     <>
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      gap={1} 
-      sx={{ width: '100%', maxWidth: 400, margin: '0 auto', mt: 4 }} 
-    >
-      <Course 
-      selectCourse={selectCourse} 
-      setSelectCourse={setSelectCourse} 
-      />
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        gap={1}
+        sx={{ width: "100%", maxWidth: 400, margin: "0 auto", mt: 4 }}
+      >
+        <Course selectCourse={selectCourse} setSelectCourse={setSelectCourse} />
 
-      <AuthDesign
-        title="Register"
-        inputFields={inputFields}
-        buttonText="Register"
-        onSubmit={handleSubmit}
-      />
+        <AuthDesign
+          title="Register"
+          inputFields={inputFields}
+          buttonText="Register"
+          onSubmit={handleSubmit}
+        />
       </Box>
     </>
   );

@@ -32,17 +32,20 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");  // Get token from localStorage
+        console.log("TOKEN:", token);
+
         const res = await API.get("/dashboard", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,  // Pass token in headers
           },
         });
+
         setUser(res.data.user);
         setAssignments(res.data.assignments);
         setLoading(false);
       } catch (err) {
-        console.error('Rename failed:', err);
+        console.error("Dashboard fetch failed:", err);
         setLoading(false);
       }
     };
@@ -57,14 +60,19 @@ const Dashboard = () => {
     <Box
       sx={{ flexGrow: 1, p: 3, backgroundColor: "#f5f7fa", minHeight: "100vh" }}
     >
-      <Typography variant="h4" align="center" gutterBottom>
-        Welcome, {user.name}!
+      <Typography variant="subtitle1" align="center" gutterBottom>
+        Welcome, {user.name ? user.name : "N/A"}!
       </Typography>
       <Typography variant="subtitle1" align="center" gutterBottom>
-        Enrolled in: <strong>{user.courseName}</strong>
+        Enrolled in: <strong>{user.courseName ? user.courseName : "N/A"}</strong>
       </Typography>
-
-      <Grid container columns={12} columnSpacing={4} rowSpacing={4} justifyContent="center">
+      <Grid
+        container
+        columns={12}
+        columnSpacing={4}
+        rowSpacing={4}
+        justifyContent="center"
+      >
         <Grid sx={{ gridColumn: "span 4" }}>
           <Item>
             <DisplayDate />

@@ -42,8 +42,7 @@ const Course = ({ selectCourse, setSelectCourse }) => {
                 <MenuItem
                   key={course}
                   onClick={() => {
-                    handleSelect(course);
-                    popupState.close();
+                    handleSelect(course, popupState);
                   }}
                 >
                   {course}

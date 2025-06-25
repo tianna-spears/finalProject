@@ -1,7 +1,7 @@
-require('dotenv').config()
+require("dotenv").config();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -20,27 +20,37 @@ const userLogin = async (req, res) => {
         .json({ message: `User with ${email} not found. Please try again.` });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
 
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Incorrect password." });
     }
 
-// JWT goes here bc user is found in database and logged in
+    // JWT goes here bc user is found in database and logged in
     const token = jwt.sign(
-        {
-            userId: existingUser._id, 
-            email: existingUser.email,
-            firstName: existingUser.firstName,
-            courseName: existingUser.courseName,
-        },
-            process.env.JWT_SECRET_KEY,
-            { expiresIn: '2h'}            
-    )
+      {
+        userId: existingUser._id,
+        email: existingUser.email,
+        firstName: existingUser.firstName,
+        courseName: existingUser.courseName,
+      },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "2h" }
+    );
+    res.status(201).json({
+      message: "User successfully created!",
+      user: savedUser,
+      token,
+    });
+
     const { password: _, ...userWithoutPassword } = existingUser.toObject();
-    res
-      .status(200)
-      .json({ message: "Login successful!", user: userWithoutPassword, token,
+    res.status(200).json({
+      message: "Login successful!",
+      user: userWithoutPassword,
+      token,
     });
   } catch (err) {
     return res.status(500).json({ error: "Server error. Please try again." });

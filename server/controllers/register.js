@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Course = require("../models/Course");
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
 
 const registerUser = async (req, res) => {
   const { firstName, lastName, email, password, courseName } = req.body;
@@ -31,10 +32,24 @@ const existingUser = await User.findOne( { email })
       password: hashedPassword,
       courseID: courseNum._id,
     });
+
     await newUser.save();
-    res
-      .status(201)
-      .json({ message: "User successfully created!", user: newUser });
+
+        const token = jwt.sign(
+      {
+        userId: newUser._id,
+        email: newUser.email,
+        firstName: newUser.firstName,
+        courseName: courseName,
+      },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "2h" }
+    );
+    res.status(201).json({
+      message: "User successfully created!",
+      user: newUser,
+      token, // send token here
+    });
   } catch (err) {
     res.status(500).json({ error: "Server error. New user not created." });
   }
