@@ -7,10 +7,15 @@ const registerRoute = require("./routes/register");
 const dashboardRoute = require("./routes/dashboard");
 const dataInputRoute = require("./routes/dataInput")
 const connectDB = require("./database/connectDB");
+const cors = require('cors')
 
 // middleware
 const authMiddleware = require('./middleware/auth')
 app.use(express.json());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 const PORT = process.env.PORT || 3001;
 

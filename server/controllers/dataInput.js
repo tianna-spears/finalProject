@@ -46,7 +46,7 @@ const createAssignment = async (req, res) => {
     const newAssignment = new Assignment({
       title,
       dueDate,
-      course: findCourse._id,
+      courseID: findCourse._id,
       lesson,
     });
     await newAssignment.save();
@@ -85,6 +85,15 @@ const createMentorSession = async (req, res) => {
       .send(
         "There was an issue creating your mentor session. Please try again later."
       );
+  }
+};
+
+const getMentors = async (req, res) => {
+  try {
+    const sessions = await MentorSession.find();
+    res.status(200).json(sessions);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -131,6 +140,7 @@ module.exports = {
   createCourse,
   createAssignment,
   createMentorSession,
+  getMentors,
   getAllCourses,
   getAllAssignments,
   getUserByCourseID,

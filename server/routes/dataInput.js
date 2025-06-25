@@ -4,6 +4,7 @@ const {
   createCourse,
   createAssignment,
   createMentorSession,
+  getMentors,
   getAllCourses,
   getAllAssignments,
   getUserByCourseID,
@@ -12,6 +13,7 @@ const {
 router.post("/course", createCourse);
 router.post("/assignment", createAssignment);
 router.post("/mentor", createMentorSession);
+router.get("/mentor", getMentors);
 router.get("/course", getAllCourses);
 router.get("/assignment", getAllAssignments);
 router.get("/course/:id", getUserByCourseID);

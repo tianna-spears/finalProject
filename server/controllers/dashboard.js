@@ -26,6 +26,7 @@ const getDashboard = async (req, res) => {
       user: {
         name: getUserDashboard.firstName,
         courseName: getUserDashboard.courseID.courseName,
+        courseID: getUserDashboard.courseID._id.toString()
       },
       assignments
     });
