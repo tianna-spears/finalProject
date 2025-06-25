@@ -1,7 +1,7 @@
 const Course = require("../models/Course");
 const Assignment = require("../models/Assignment");
 const User = require("../models/User")
-const MentorSession = require('../models/MentorSession');
+const MentorSession = require("./models/mentorSession");
 
 
 const createCourse = async (req, res) => {
