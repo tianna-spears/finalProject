@@ -33,6 +33,7 @@ const Dashboard = () => {
     const fetchDashboard = async () => {
       try {
         const token = localStorage.getItem("token");
+        console.log("Using token:", token);
         const res = await API.get("/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -42,6 +43,7 @@ const Dashboard = () => {
         setAssignments(res.data.assignments);
         setLoading(false);
       } catch (err) {
+        console.error("Failed to fetch dashboard:", err);
         setLoading(false);
       }
     };

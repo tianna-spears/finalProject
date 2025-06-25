@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Menu, MenuItem, Typography } from '@mui/material'
+import { Stack, Button, Menu, MenuItem, Typography } from '@mui/material'
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 const Course = ({ selectCourse, setSelectCourse }) => {
@@ -42,8 +42,7 @@ const Course = ({ selectCourse, setSelectCourse }) => {
                 <MenuItem
                   key={course}
                   onClick={() => {
-                    handleSelect(course);
-                    popupState.close();
+                    handleSelect(course, popupState)
                   }}
                 >
                   {course}

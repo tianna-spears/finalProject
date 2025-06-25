@@ -57,7 +57,7 @@ const Register = () => {
           courseName: selectCourse,
         });
         console.log("Registration successful:", res.data);
-        navigate("/dashboard");
+        navigate("/login");
       } catch (err) {
         console.error(
           "Registration failed:",
