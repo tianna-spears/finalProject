@@ -33,7 +33,7 @@ const Dashboard = () => {
     const fetchDashboard = async () => {
       try {
         const token = localStorage.getItem("token");  // Get token from localStorage
-        console.log("TOKEN:", token);
+        // console.log("TOKEN:", token);
 
         const res = await API.get("/dashboard", {
           headers: {

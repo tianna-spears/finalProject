@@ -41,7 +41,6 @@ const AuthDesign = ({ title, inputFields, buttonText, onSubmit }) => {
   color="secondary"
   sx={{ width: 200 }}
   type="submit"
-  onClick={() => console.log("Button clicked")}
 >
   {buttonText}
 </Button>
