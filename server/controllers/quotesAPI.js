@@ -1,13 +1,14 @@
-// const express = require("express");
-// const quotesAPI_key = process.env.quotesAPI_key;
+const axios = require('axios')
 
-// const getQuotes = async (req, res) => {
-//   try {
-//     const quotes = await quotesAPI_key;
-//     res.status(200).send(quotes);
-//   } catch (err) {
-//     res.status(500).send("Error");
-//   }
-// };
+const getQuotes = async (req, res) => {
+  try {
+    const response = await axios.get("https://zenquotes.io/api/random");
+    const quote = response.data[0];
+    res.status(200).json(quote);
+  } catch (err) {
+    console.error("Error fetching quote:", err.message);
+    res.status(500).send("Failed to fetch quote");
+  }
+};
 
-// module.export = getQuotes;
+module.exports = getQuotes;

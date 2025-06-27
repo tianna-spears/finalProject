@@ -1,6 +1,7 @@
-// const express = require('express')
-// const router = express.Router()
+const express = require('express')
+const router = express.Router()
+const getQuotesController = require('../controllers/quotesAPI')
 
-// quotesAPI.get('/', getQuotes)
+router.get('/', getQuotesController)
 
-// module.exports = router;
+module.exports = router;
