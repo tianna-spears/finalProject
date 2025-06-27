@@ -9,6 +9,7 @@ import UpcomingAssignments from "../UI/UpcomingAssignments";
 import MentorSession from "../UI/MentorSession";
 import StudyCalendar from "../UI/StudyCalendar";
 import DisplayDate from "../UI/DisplayDate";
+import QuotesAPI from "../UI/QuotesAPI"
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -32,12 +33,12 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const token = localStorage.getItem("token"); 
+        const token = localStorage.getItem("token");
         // console.log("TOKEN:", token);
 
         const res = await API.get("/dashboard", {
           headers: {
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -64,7 +65,8 @@ const Dashboard = () => {
         Welcome, {user.name ? user.name : "N/A"}!
       </Typography>
       <Typography variant="subtitle1" align="center" gutterBottom>
-        Enrolled in: <strong>{user.courseName ? user.courseName : "N/A"}</strong>
+        Enrolled in:{" "}
+        <strong>{user.courseName ? user.courseName : "N/A"}</strong>
       </Typography>
       <Grid
         container
@@ -76,6 +78,12 @@ const Dashboard = () => {
         <Grid sx={{ gridColumn: "span 4" }}>
           <Item>
             <DisplayDate />
+          </Item>
+        </Grid>
+
+        <Grid sx={{ gridColumn: "span 4" }}>
+          <Item>
+            <QuotesAPI />
           </Item>
         </Grid>
 

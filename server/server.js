@@ -6,6 +6,7 @@ const loginRoute = require("./routes/login");
 const registerRoute = require("./routes/register");
 const dashboardRoute = require("./routes/dashboard");
 const dataInputRoute = require("./routes/dataInput")
+// const quotesAPIRoute = require("./routes/quotesAPI")
 const connectDB = require("./database/connectDB");
 const cors = require('cors')
 
@@ -28,6 +29,7 @@ app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/dashboard", authMiddleware, dashboardRoute);
 app.use("/dataInput", authMiddleware, dataInputRoute)
+// app.use("/quotes", authMiddleware, quotesAPIRoute)
 
 const start = async () => {
     try {
