@@ -32,12 +32,12 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const token = localStorage.getItem("token");  // Get token from localStorage
+        const token = localStorage.getItem("token"); 
         // console.log("TOKEN:", token);
 
         const res = await API.get("/dashboard", {
           headers: {
-            Authorization: `Bearer ${token}`,  // Pass token in headers
+            Authorization: `Bearer ${token}`, 
           },
         });
 
@@ -97,6 +97,7 @@ const Dashboard = () => {
         <Grid sx={{ gridColumn: "span 6" }}>
           <Item>
             <MentorSession />
+            {/* add buttons here CRUD */}
           </Item>
         </Grid>
       </Grid>

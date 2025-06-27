@@ -9,7 +9,12 @@ import {
   Stack,
 } from "@mui/material";
 
-const AuthDesign = ({ title, inputFields, buttonText, onSubmit }) => {
+const AuthDesign = ({
+  title,
+  inputFields,
+  buttonText,
+  onSubmit,
+}) => {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
       <Card sx={{ width: 400 }}>
@@ -21,7 +26,7 @@ const AuthDesign = ({ title, inputFields, buttonText, onSubmit }) => {
           <form onSubmit={onSubmit}>
             <Stack spacing={2} alignItems="center">
               {inputFields.map(
-                ({ label, type = "text", name, value, onChange }, index) => (
+                ({ label, type = "text", name, value, onChange, autoComplete }, index) => (
                   <TextField
                     key={index}
                     label={label}
@@ -33,17 +38,18 @@ const AuthDesign = ({ title, inputFields, buttonText, onSubmit }) => {
                     required
                     value={value || ""}
                     onChange={onChange}
+                    autoComplete={autoComplete}
                   />
                 )
               )}
-<Button
-  variant="contained"
-  color="secondary"
-  sx={{ width: 200 }}
-  type="submit"
->
-  {buttonText}
-</Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{ width: 200 }}
+                type="submit"
+              >
+                {buttonText}
+              </Button>
             </Stack>
           </form>
         </CardContent>
