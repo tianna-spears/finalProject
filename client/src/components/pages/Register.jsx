@@ -20,12 +20,14 @@ const Register = () => {
       name: "firstName",
       value: firstName,
       onChange: (e) => setFirstName(e.target.value),
+      autoComplete: "firstname",
     },
     {
       label: "Last Name",
       name: "lastName",
       value: lastName,
       onChange: (e) => setLastName(e.target.value),
+      autoComplete: "lastname",
     },
     {
       label: "Email",
@@ -33,6 +35,7 @@ const Register = () => {
       name: "email",
       value: email,
       onChange: (e) => setEmail(e.target.value),
+      autoComplete: "email",
     },
     {
       label: "Password",
@@ -40,6 +43,7 @@ const Register = () => {
       name: "password",
       value: password,
       onChange: (e) => setPassword(e.target.value),
+      autoComplete: "password",
     },
   ];
 

@@ -10,7 +10,7 @@ const DateDisplay = () => {
   });
 
   return (
-    <Typography variant="h6" sx={{ mt: 2 }}>
+    <Typography variant="h6">
       Today's Date is: <strong>{today}</strong>
     </Typography>
   );
