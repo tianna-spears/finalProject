@@ -38,15 +38,11 @@ const userLogin = async (req, res) => {
         courseName: existingUser.courseName,
       },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "2h" }
+      { expiresIn: "24h" }
     );
-    res.status(201).json({
-      message: "User successfully created!",
-      user: savedUser,
-      token,
-    });
 
     const { password: _, ...userWithoutPassword } = existingUser.toObject();
+    
     res.status(200).json({
       message: "Login successful!",
       user: userWithoutPassword,
