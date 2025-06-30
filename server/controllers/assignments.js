@@ -22,11 +22,7 @@ const createAssignments = async (req, res) => {
     });
     await newAssignment.save();
 
-    res
-      .status(201)
-      .send(
-        `Assignment ${title} with a due date of: ${dueDate} was successfully created!`
-      );
+    res.status(201).send(`Assignment ${title} with a due date of: ${dueDate} was successfully created!`);
   } catch (err) {
     console.error("Error creating assignment:", err);
     res.status(500).send("There was an issue creating your assignment. Please try again later.");
