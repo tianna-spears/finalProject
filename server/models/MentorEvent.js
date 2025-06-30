@@ -8,6 +8,10 @@ const MentorEvent = new mongoose.Schema({
   sessionDate: {
     type: String,
     required: true,
+  },   
+  sessionTime: {
+    type: String,
+    required: true,
   }
 });
   

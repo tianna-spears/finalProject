@@ -5,13 +5,15 @@ const app = express();
 const loginRoute = require("./routes/login");
 const registerRoute = require("./routes/register");
 const dashboardRoute = require("./routes/dashboard");
-const dataInputRoute = require("./routes/dataInput")
-const quotesAPIRoute = require("./routes/quotesAPI")
+const quotesAPIRoute = require("./routes/quotesAPI");
+const coursesRoute = require("./routes/courses");
+const mentorsRoute = require("./routes/mentors");
+const assignmentsRoute = require("./routes/assignments");
 const connectDB = require("./database/connectDB");
-const cors = require('cors')
+const cors = require('cors');
 
 // middleware
-const authMiddleware = require('./middleware/auth')
+const authMiddleware = require('./middleware/auth');
 app.use(express.json());
 app.use(cors());
 
@@ -25,8 +27,11 @@ app.get("/", (req, res) => {
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/dashboard", authMiddleware, dashboardRoute);
-app.use("/dataInput", authMiddleware, dataInputRoute)
 app.use("/quotes", quotesAPIRoute)
+app.use("/courses", coursesRoute)
+app.use("/mentors", mentorsRoute)
+app.use("/assignments", assignmentsRoute)
+
 
 const start = async () => {
     try {
