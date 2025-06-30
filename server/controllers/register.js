@@ -48,7 +48,7 @@ const existingUser = await User.findOne( { email })
     res.status(201).json({
       message: "User successfully created!",
       user: newUser,
-      token, // send token here
+      token, 
     });
   } catch (err) {
     res.status(500).json({ error: "Server error. New user not created." });
