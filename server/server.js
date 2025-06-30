@@ -17,7 +17,7 @@ const authMiddleware = require('./middleware/auth');
 app.use(express.json());
 app.use(cors());
 
-const PORT = process.env.PORT || 3001;
+const PORT = 3000;
 
 // routes
 app.get("/", (req, res) => {

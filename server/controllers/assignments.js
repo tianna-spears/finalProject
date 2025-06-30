@@ -5,9 +5,7 @@ const createAssignments = async (req, res) => {
   try {
     const { title, dueDate, courseName, lesson } = req.body;
     if (!title || !dueDate || !courseName || !lesson) {
-      return res
-        .status(400)
-        .json({ error: "Please insert all required fields." });
+      return res.status(400).json({ error: "Please insert all required fields." });
     }
 
     const findCourse = await Course.findOne({ courseName });
@@ -31,11 +29,7 @@ const createAssignments = async (req, res) => {
       );
   } catch (err) {
     console.error("Error creating assignment:", err);
-    res
-      .status(500)
-      .send(
-        "There was an issue creating your assignment. Please try again later."
-      );
+    res.status(500).send("There was an issue creating your assignment. Please try again later.");
   }
 };
 
