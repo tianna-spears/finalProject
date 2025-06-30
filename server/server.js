@@ -13,10 +13,7 @@ const cors = require('cors')
 // middleware
 const authMiddleware = require('./middleware/auth')
 app.use(express.json());
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
-}));
+app.use(cors());
 
 const PORT = process.env.PORT || 3001;
 
@@ -29,7 +26,7 @@ app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/dashboard", authMiddleware, dashboardRoute);
 app.use("/dataInput", authMiddleware, dataInputRoute)
-app.use("/quotes", authMiddleware, quotesAPIRoute)
+app.use("/quotes", quotesAPIRoute)
 
 const start = async () => {
     try {
