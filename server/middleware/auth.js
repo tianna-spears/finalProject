@@ -19,7 +19,6 @@ if (!authHeader) {
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    console.log("JWT payload:", payload);
 
     req.user = {
       userId: payload.userId,
@@ -27,7 +26,6 @@ if (!authHeader) {
       firstName: payload.firstName,
       courseName: payload.courseName,
     };
-    console.log("Auth middleware passed");
     next();
   } catch (error) {
     console.error("JWT error:", error);
