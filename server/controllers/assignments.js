@@ -11,7 +11,6 @@ const createAssignments = async (req, res) => {
         .status(400)
         .json({ error: "Please insert all required fields." });
     }
-
     const findCourse = await Course.findById(courseID);
 
     if (!findCourse) {

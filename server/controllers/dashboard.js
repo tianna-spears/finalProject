@@ -11,12 +11,8 @@ const getGreeting = async (req, res) => {
 };
 
 const getDashboard = async (req, res) => {
-  console.log("Dashboard handler reached");
   try {
     const getUserID = req.user.userId
-
-    console.log("req.user:", req.user);
-    console.log("req.user in dashboard:", req.user);
 
 if (!req.user || !req.user.userId) {
   return res.status(401).json({ error: "Unauthorized: No user ID found." });
