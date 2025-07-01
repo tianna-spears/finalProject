@@ -4,4 +4,4 @@ On the dashboard, the student can see and change their enrolled course, save enr
 
 This app allows students to see their long term progress on a dashboard/ home page. 
 
-This is a full-stack project that uses React in the front-end and Node.js / Express in the back-end with CRUD functionality.
+This is a full-stack project that uses React in the front-end and Node.js / Express in the back-end with CRUD functionality. Designed with Material UI.
