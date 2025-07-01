@@ -15,7 +15,8 @@ const Course = new mongoose.Schema({
     required: true,
   },
   courseDates: {
-    type: String,
+    type: [String],
+    default: [],
     required: true,
   },
 });

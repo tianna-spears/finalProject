@@ -3,12 +3,16 @@ const Assignment = require("../models/Assignment");
 
 const createAssignments = async (req, res) => {
   try {
-    const { title, dueDate, courseName, lesson } = req.body;
-    if (!title || !dueDate || !courseName || !lesson) {
-      return res.status(400).json({ error: "Please insert all required fields." });
+    // console.log("Request body:", req.body); 
+    const { title, dueDate, courseID, lesson } = req.body;
+    // console.log('Received courseID:', courseID);
+    if (!title || !dueDate || !courseID || !lesson) {
+      return res
+        .status(400)
+        .json({ error: "Please insert all required fields." });
     }
 
-    const findCourse = await Course.findOne({ courseName });
+    const findCourse = await Course.findById(courseID);
 
     if (!findCourse) {
       return res.status(404).json({ error: "Course not found." });
@@ -17,15 +21,23 @@ const createAssignments = async (req, res) => {
     const newAssignment = new Assignment({
       title,
       dueDate,
-      courseID: findCourse._id,
       lesson,
+      courseID,
     });
+    // console.log("Received courseID:", courseID);
     await newAssignment.save();
 
-    res.status(201).send(`Assignment ${title} with a due date of: ${dueDate} was successfully created!`);
+    res.status(201)
+      .json(
+        `Assignment ${title} with a due date of: ${dueDate} was successfully created!`
+  );
   } catch (err) {
     console.error("Error creating assignment:", err);
-    res.status(500).send("There was an issue creating your assignment. Please try again later.");
+    res
+      .status(500)
+      .send(
+        "There was an issue creating your assignment. Please try again later."
+      );
   }
 };
 
@@ -79,7 +91,9 @@ const deleteAssignments = async (req, res) => {
       return res.status(404).json({ error: "Assignment not found." });
     }
 
-    res.status(200).json({ message: `Assignment ${deletedAssignment.title} deleted.` });
+    res
+      .status(200)
+      .json({ message: `Assignment ${deletedAssignment.title} deleted.` });
   } catch (error) {
     console.error("Error deleting assignment:", error);
     res.status(500).json({ error: error.message });

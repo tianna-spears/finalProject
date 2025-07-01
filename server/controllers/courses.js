@@ -3,6 +3,7 @@ const User = require("../models/User");
 
 const createCourses = async (req, res) => {
   const { courseName, courseDates } = req.body;
+
   if (!courseName || !courseDates) {
     return res
       .status(400).json({ error: "Please insert all required fields." });
@@ -16,6 +17,7 @@ const createCourses = async (req, res) => {
     await newCourse.save();
     res.status(201).json(`Course ${courseName} was successfully created!`);
   } catch (err) {
+    console.error("Create course error:", err);
     res.status(500).send("There was an issue creating your course. Please try again later.");
   }
 };
@@ -25,6 +27,7 @@ const getAllCourses = async (req, res) => {
     const allCourses = await Course.find();
     res.status(200).json(allCourses);
   } catch (err) {
+    console.error('Error in getAllCourses:', err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -71,6 +74,39 @@ const updateCourses = async (req, res) => {
   }
 };
 
+const updateUserCourse = async (req, res) => {
+  const { id } = req.params; 
+  const { courseID } = req.body; 
+
+  if (!courseID) {
+    return res.status(400).json({ error: "Please provide new courseID." });
+  }
+
+  try {
+    const course = await Course.findById(courseID);
+    if (!course) {
+      return res.status(404).json({ error: "Course not found." });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { courseID: courseID },
+      { new: true }
+    ).populate("courseID", "courseName");
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    res.status(200).json({
+      message: "User enrolled course updated successfully.",
+      user: updatedUser,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const deleteCourses = async (req, res) => {
   const { id } = req.params;
   if (!id) {
@@ -95,5 +131,6 @@ module.exports = {
   getAllCourses,
   getUserByCourseID,
   updateCourses,
+  updateUserCourse,
   deleteCourses,
 };
