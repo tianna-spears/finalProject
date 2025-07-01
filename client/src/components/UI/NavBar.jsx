@@ -40,7 +40,7 @@ const NavBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Apprenti
+            Student Study Manager
             <ImArrowUpRight2 />
           </Typography>
           <Button color="inherit" component={Link} to="/">

@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <Box sx={{ maxWidth: 400, margin: "auto", mt: 5, p: 2 }}>
       <Card>
-        <CardHeader title="Welcome to Apprenti!" />
+        <CardHeader title="Welcome to the Student Study Manager!" />
         <CardContent>
           <Typography variant="body1" gutterBottom>
             We help Code The Dream students stay focused on the road to success.
