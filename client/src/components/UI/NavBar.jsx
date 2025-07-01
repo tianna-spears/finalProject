@@ -12,19 +12,19 @@ import { Link } from "react-router-dom";
 import Logout from "./Logout";
 
 const NavBar = () => {
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    setIsLoggedIn(!!token)
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token")
-    setIsLoggedIn(false)
-    navigate("/login")
-  }
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -42,14 +42,29 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Apprenti
             <ImArrowUpRight2 />
-          </Typography>          
-          <Button color="inherit" component={Link} to="/"> Home </Button>
-          <Button color="inherit" component={Link} to="/login">Login </Button>
+          </Typography>
+          <Button color="inherit" component={Link} to="/">
+            {" "}
+            Home{" "}
+          </Button>
 
-          {isLoggedIn && (
-          <Button color="inherit" component={Link} to="/" onClick= {handleLogout}> Logout </Button>
+          {!isLoggedIn && (
+            <Button color="inherit" component={Link} to="/login">
+              Login{" "}
+            </Button>
           )}
 
+          {isLoggedIn && (
+            <Button
+              color="inherit"
+              component={Link}
+              to="/logout"
+              onClick={handleLogout}
+            >
+              {" "}
+              Logout{" "}
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

@@ -14,7 +14,7 @@ const MentorSession = () => {
     const fetchMentorSessions = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await API.get("/dataInput/mentor", {
+        const res = await API.get("/mentors", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

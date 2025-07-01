@@ -33,7 +33,7 @@ const AuthDesign = ({
                     type={type}
                     name={name}
                     variant="outlined"
-                    color="secondary"
+                    color="primary"
                     sx={{ width: "100%" }}
                     required
                     value={value || ""}
@@ -44,7 +44,7 @@ const AuthDesign = ({
               )}
               <Button
                 variant="contained"
-                color="secondary"
+                color="primary"
                 sx={{ width: 200 }}
                 type="submit"
               >
