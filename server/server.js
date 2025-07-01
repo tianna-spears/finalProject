@@ -14,10 +14,15 @@ const cors = require('cors');
 
 // middleware
 const authMiddleware = require('./middleware/auth');
-app.use(cors());
 app.use(express.json());
 
-const PORT = 3000;
+const corsOptions = {
+  origin: 'http://localhost:5173', // your frontend origin
+  credentials: true,  // if you want to send cookies/auth headers
+};
+
+app.use(cors(corsOptions));
+const PORT = process.env.PORT || 3000;
 
 // routes
 app.get("/", (req, res) => {

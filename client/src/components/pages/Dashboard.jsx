@@ -44,6 +44,8 @@ const Dashboard = () => {
     const fetchDashboard = async () => {
       try {
         const token = localStorage.getItem("token");
+        console.log("Token before API call:", token);
+
         const res = await API.get("/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`,

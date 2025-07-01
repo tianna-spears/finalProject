@@ -31,6 +31,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Token before API call:", token);
+
       const res = await API.post("/login", { email, password });
       const { token } = res.data;
 
