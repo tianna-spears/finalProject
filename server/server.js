@@ -16,12 +16,11 @@ const cors = require('cors');
 const authMiddleware = require('./middleware/auth');
 app.use(express.json());
 
-const corsOptions = {
-  origin: 'http://localhost:5173', // your frontend origin
-  credentials: true,  // if you want to send cookies/auth headers
-};
+app.use(cors({
+  origin: "https://client-finalproject-ew1x.onrender.com"
+}));
 
-app.use(cors(corsOptions));
+
 const PORT = process.env.PORT || 3000;
 
 // routes
