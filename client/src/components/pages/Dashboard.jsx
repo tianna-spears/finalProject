@@ -44,16 +44,12 @@ const Dashboard = () => {
     const fetchDashboard = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log("Token before API call:", token);
 
         const res = await API.get("/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("Token after login:", token);
-
-        console.log("User from API:", res.data.user); 
 
         setUser(res.data.user);
         setAssignments(res.data.assignments);
@@ -159,7 +155,6 @@ const handleUpdateCourse = async () => {
     if (!selectedEnrollmentCourseId) return;
     try {
       const token = localStorage.getItem("token");
-      console.log("user._id:", user?._id);
 
       await API.patch(`/courses/user/${user._id}`, { courseID: selectedEnrollmentCourseId }, {
         headers: { Authorization: `Bearer ${token}` },
