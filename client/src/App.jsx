@@ -8,6 +8,8 @@ import Dashboard from "./components/pages/Dashboard";
 import Logout from "./components/UI/Logout";
 
 function App() {
+  console.log("API URL:", import.meta.env.VITE_RENDER_API);
+
   return (
     <BrowserRouter>
       <NavBar />

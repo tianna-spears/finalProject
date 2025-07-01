@@ -5,6 +5,9 @@
 
 import axios from "axios";
 
+console.log(import.meta.env.VITE_RENDER_API)
+
+
 const API = axios.create({
   baseURL: import.meta.env.VITE_RENDER_API,
 });
