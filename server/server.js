@@ -14,8 +14,8 @@ const cors = require('cors');
 
 // middleware
 const authMiddleware = require('./middleware/auth');
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 const PORT = 3000;
 

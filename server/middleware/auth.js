@@ -20,8 +20,13 @@ const authMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     console.error("JWT error:", error);
-    return res.status(401).json({ message: "Unauthorized: Invalid token" });
+
+    if(error.name === 'TokenExpiredError') {
+    return res.status(401).json({ message: "Unauthorized: Token expired. Please login again." });
   }
+    return res.status(401).json({ message: "Unauthorized: Invalid token." });
+}
+
 };
 
 module.exports = authMiddleware;

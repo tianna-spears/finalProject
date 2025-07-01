@@ -38,7 +38,7 @@ const userLogin = async (req, res) => {
         courseName: existingUser.courseName,
       },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "24h" }
+      { expiresIn: "168h" }
     );
 
     const { password: _, ...userWithoutPassword } = existingUser.toObject();
