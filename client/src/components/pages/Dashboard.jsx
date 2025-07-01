@@ -51,6 +51,7 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log("Token after login:", token);
 
         console.log("User from API:", res.data.user); 
 
