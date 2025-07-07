@@ -16,6 +16,7 @@ const Login = () => {
       value: email,
       onChange: (e) => setEmail(e.target.value),
       autoComplete: 'username',  
+      "data-testid": "login-email"
     },
     {
       label: "Password",
@@ -23,7 +24,8 @@ const Login = () => {
       name: "password",
       value: password,
       onChange: (e) => setPassword(e.target.value),
-      autoComplete: 'current-password',  
+      autoComplete: 'current-password', 
+      "data-testid": "login-password" 
 
     },
   ];
