@@ -7,7 +7,6 @@ const {
   deleteAssignments
 } = require('../controllers/assignments')
 
-
 router.post("/", createAssignments);
 router.get("/", getAllAssignments);
 router.patch("/:id", updateAssignments);

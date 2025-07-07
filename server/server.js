@@ -55,6 +55,7 @@ app.use("/assignments", assignmentsRoute)
 
 const port = process.env.PORT || 3000;
 
+
 const start = () => {
   try {
     connectDB()

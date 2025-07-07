@@ -4,9 +4,10 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 
 const registerUser = async (req, res) => {
+  console.log("Register controller called");
+  console.log("Request body:", req.body);
   const { firstName, lastName, email, password, courseName } = req.body;
 console.log("Register request body:", req.body);
-
 
 // require all input fields to register  
   if (!firstName || !lastName || !email || !password || !courseName) {
@@ -48,7 +49,7 @@ const existingUser = await User.findOne( { email })
       { expiresIn: "2h" }
     );
       console.log("Sending token and user data:", { token, newUser })
-    res.status(201).json({
+    return res.status(201).json({
       message: "User successfully created!",
       token,
       user: {
@@ -56,8 +57,9 @@ const existingUser = await User.findOne( { email })
       }
     });
   } catch (err) {
-    res.status(500).json({ error: "Server error. New user not created." });
+    return res.status(500).json({ error: "Server error. New user not created." });
   }
+
 };
 
 module.exports = registerUser;
