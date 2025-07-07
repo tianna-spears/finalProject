@@ -1,9 +1,11 @@
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "./env") });
 
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 
+// to be able to run tests in testing directory
 const connectDB = async () => {
   try {
     let mongoURL = process.env.MONGODB_URI;

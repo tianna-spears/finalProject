@@ -20,14 +20,31 @@ app.use(cors({
   origin: "https://client-finalproject-ew1x.onrender.com"
 }));
 
-
-const PORT = process.env.PORT || 3000;
-
-// routes
-app.get("/", (req, res) => {
-  res.send("It worked!");
+// fixing issue with Chai and Express Rendering Engine
+app.use((req, res, next) => {
+  if (req.path == "/multiply") {
+    res.set("Content-Type", "application/json");
+  } 
+  next();
 });
 
+// index route
+app.get("/", (req, res) => {
+  res.send("Testing website!");
+});
+
+// testing route API
+app.get("/multiply", (req, res) => {
+  const result = req.query.first * req.query.second;
+  if (result.isNaN) {
+    result = "NaN";
+  } else if (result == null) {
+    result = "null";
+  }
+  res.json({ result: result });
+});
+
+// routes
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/dashboard", authMiddleware, dashboardRoute);
@@ -36,16 +53,20 @@ app.use("/courses", coursesRoute)
 app.use("/mentors", mentorsRoute)
 app.use("/assignments", assignmentsRoute)
 
+const port = process.env.PORT || 3000;
 
-const start = async () => {
-    try {
-        await connectDB();
-        app.listen(PORT, () => {
-            console.log(`Server is listening on port ${PORT}`)
-        })
-    } catch (err) {
-        console.log('Error starting the server.', err.message)
-    }
+const start = () => {
+  try {
+    connectDB()
+    return app.listen(port, () =>
+      console.log(`Server is listening on port ${port}...`),
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-start()
+start();
+
+module.exports = { app };
+
