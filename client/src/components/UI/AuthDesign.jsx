@@ -26,7 +26,7 @@ const AuthDesign = ({
           <form onSubmit={onSubmit}>
             <Stack spacing={2} alignItems="center">
               {inputFields.map(
-                ({ label, type = "text", name, value, onChange, autoComplete }, index) => (
+                ({ label, type = "text", name, value, onChange, autoComplete, ...rest }, index) => (
                   <TextField
                     key={index}
                     label={label}
@@ -39,6 +39,7 @@ const AuthDesign = ({
                     value={value || ""}
                     onChange={onChange}
                     autoComplete={autoComplete}
+                    {...rest}
                   />
                 )
               )}
@@ -47,6 +48,7 @@ const AuthDesign = ({
                 color="primary"
                 sx={{ width: 200 }}
                 type="submit"
+                data-testid= "login-button"
               >
                 {buttonText}
               </Button>

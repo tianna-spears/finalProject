@@ -17,7 +17,7 @@ const Home = () => {
               Click here to Register.
             </Button>
 
-            <Button variant="outlined" color="primary" component={Link} to="/login">
+            <Button variant="outlined" color="primary" component={Link} to="/login"  data-testid="goto-login">
               Already a user? Click here to Login.
             </Button>
           </Stack>

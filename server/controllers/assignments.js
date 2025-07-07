@@ -26,10 +26,10 @@ const createAssignments = async (req, res) => {
     // console.log("Received courseID:", courseID);
     await newAssignment.save();
 
-    res.status(201)
-      .json(
-        `Assignment ${title} with a due date of: ${dueDate} was successfully created!`
-  );
+    res.status(201).json( {
+      assignment: newAssignment,
+      message: `Assignment ${title} with a due date of: ${dueDate} was successfully created!`
+  });
   } catch (err) {
     console.error("Error creating assignment:", err);
     res
